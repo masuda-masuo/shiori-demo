@@ -35,7 +35,7 @@ export default {
           
         return {
           title,
-          url: `/columns/${path.basename(file, '.md')}.html`,
+          url: `/columns/${path.basename(file, '.md')}`,
           id,
           summary
         }

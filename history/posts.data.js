@@ -35,7 +35,7 @@ export default {
           
         return {
           title,
-          url: `/history/${path.basename(file, '.md')}.html`,
+          url: `/history/${path.basename(file, '.md')}`,
           id,
           summary
         }

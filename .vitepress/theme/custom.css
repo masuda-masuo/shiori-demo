@@ -1,6 +1,7 @@
 /* Mermaid Diagram Scroll Wrapper */
 .mermaid-wrapper {
   width: 100%;
+  max-width: 100%; /* Stay within content container boundary */
   overflow-x: auto;
   margin: 2rem 0;
   padding: 1.25rem;
@@ -8,18 +9,61 @@
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
   box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  display: block; /* Block layout prevents Flex parent layout breakage */
+  position: relative;
+  cursor: zoom-in;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* Ensure SVG is readable and doesn't squash down to micro-size */
+/* Zoomed fullscreen popup state */
+.mermaid-wrapper.zoomed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999;
+  background: rgba(10, 12, 16, 0.98);
+  margin: 0 !important;
+  padding: 3rem;
+  border-radius: 0;
+  border: none;
+  cursor: zoom-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+/* Close instruction guide in zoomed view */
+.mermaid-wrapper.zoomed::before {
+  content: "Click or press ESC to close";
+  position: fixed;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--vp-c-text-2);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.3rem 0.8rem;
+  border-radius: 30px;
+  border: 1px solid var(--vp-c-divider);
+  pointer-events: none;
+  z-index: 100000;
+}
+
+/* Ensure SVG has generous width on normal view, and fits fullscreen on zoomed */
 .mermaid-wrapper svg {
-  min-width: 1050px; /* Force minimum width to prevent scaling collapse */
-  max-width: none !important;
+  min-width: 900px; /* Fallback min-width to ensure no squashing */
+  max-width: 100%;
   height: auto !important;
   margin: 0 auto;
   display: block;
+}
+
+.mermaid-wrapper.zoomed svg {
+  min-width: 1200px; /* Even wider canvas in fullscreen */
+  max-width: 95% !important;
 }
 
 /* Scrollbar styling for smooth visual feel */
