@@ -226,18 +226,16 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Re-Render Mermaid Diagrams dynamically
             const mermaidBlocks = markdownContent.querySelectorAll(".language-mermaid");
-            mermaidBlocks.forEach((block, index) => {
+            mermaidBlocks.forEach(async (block, index) => {
                 const code = block.textContent;
-                const containerId = `mermaid-diag-${index}`;
+                const preElement = block.parentNode;
                 const wrapper = document.createElement("div");
                 wrapper.className = "mermaid-wrapper";
-                wrapper.id = containerId;
-                block.parentNode.replaceChild(wrapper, block);
+                preElement.parentNode.replaceChild(wrapper, preElement);
                 
                 try {
-                    mermaid.render(`mermaid-svg-${index}`, code, (svgCode) => {
-                        wrapper.innerHTML = svgCode;
-                    });
+                    const { svg } = await mermaid.render(`mermaid-svg-${index}`, code);
+                    wrapper.innerHTML = svg;
                 } catch (e) {
                     console.error("Mermaid parsing error:", e);
                     wrapper.innerHTML = `<div class="error-msg">Mermaid図の描画に失敗しました。</div>`;
@@ -497,18 +495,16 @@ AIエージェントの安全なオーケストレーション基盤との連携
         
         // Render Mermaid
         const mermaidBlocks = aboutContent.querySelectorAll(".language-mermaid");
-        mermaidBlocks.forEach((block, index) => {
+        mermaidBlocks.forEach(async (block, index) => {
             const code = block.textContent;
-            const containerId = `about-mermaid-diag-${index}`;
+            const preElement = block.parentNode;
             const wrapper = document.createElement("div");
             wrapper.className = "mermaid-wrapper";
-            wrapper.id = containerId;
-            block.parentNode.replaceChild(wrapper, block);
+            preElement.parentNode.replaceChild(wrapper, preElement);
             
             try {
-                mermaid.render(`about-mermaid-svg-${index}`, code, (svgCode) => {
-                    wrapper.innerHTML = svgCode;
-                });
+                const { svg } = await mermaid.render(`about-mermaid-svg-${index}`, code);
+                wrapper.innerHTML = svg;
             } catch (e) {
                 console.error("About Mermaid parsing error:", e);
                 wrapper.innerHTML = `<div class="error-msg">Mermaid図の描画に失敗しました。</div>`;
