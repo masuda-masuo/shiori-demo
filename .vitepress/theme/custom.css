@@ -1,0 +1,67 @@
+/* Mermaid Diagram Scroll Wrapper */
+.mermaid-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin: 2rem 0;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Ensure SVG is readable and doesn't squash down to micro-size */
+.mermaid-wrapper svg {
+  min-width: 900px; /* Force minimum width to prevent scaling collapse */
+  max-width: 100%;
+  height: auto !important;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Scrollbar styling for smooth visual feel */
+.mermaid-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+.mermaid-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+.mermaid-wrapper::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 4px;
+}
+.mermaid-wrapper::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-brand-1);
+}
+
+/* Autolink decoration with neon glow and FontAwesome Git icon */
+.autolink {
+  color: var(--vp-c-brand-1) !important;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  border-bottom: 1px dashed rgba(0, 242, 254, 0.4);
+  padding: 0 0.15rem;
+  text-decoration: none !important;
+}
+.autolink::before {
+  content: "\f09b"; /* FontAwesome GitHub icon */
+  font-family: "Font Awesome 6 Brands";
+  font-size: 0.9em;
+  opacity: 0.85;
+  margin-right: 0.1rem;
+}
+.autolink:hover {
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(0, 242, 254, 0.6);
+  border-bottom: 1px solid var(--vp-c-brand-1);
+  background: rgba(0, 242, 254, 0.15);
+  border-radius: 4px;
+  padding: 0 0.25rem;
+}
