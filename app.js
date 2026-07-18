@@ -418,13 +418,13 @@ sequenceDiagram
     participant Shiori as Shiori (検索MCP)
     participant GitHub as GitHub (Clones/API)
 
-    User->>Agent: 「#649のテスト失敗の原因と修正案を教えて」
+    User->>Agent: 「Issue 649のテスト失敗の原因と修正案を教えて」
     
     Note over Agent: 1. Shioriのハイブリッド検索を呼び出す
-    Agent->>Shiori: shiori_search(query="container.py #649 test fail")
+    Agent->>Shiori: shiori_search(query="container.py 649 test fail")
     
     Note over Shiori: pgvector(意味) + pgroonga(全文) で横断検索
-    Shiori-->>Agent: Pointers only: [tools/container.py:111-130, issue#649]
+    Shiori-->>Agent: Pointers only: [tools/container.py:111-130, issue 649]
     
     Note over Agent: 2. ポインタを評価し、必要なコードだけを取得 (Pointer-then-Fetch)
     Agent->>Shiori: shiori_read_file(path="tools/container.py", lines="111-130")
