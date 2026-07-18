@@ -123,6 +123,14 @@ AIエージェントは、Shioriが提供するMCPツールを以下のように
 
 ---
 
+### 📖 本デモサイトの背景（LLMインフラ論）の解説記事
+
+本サイトの構築プロセスや、AIエージェントの安全な稼働を支える「栞（Shiori）」の3層データベースモデルについては、Zennにて詳細な解説記事を公開しています。
+
+*   [Zenn: AIが栞（Shiori）を使って書いた「AI失敗学」コラム43本と、実走デモサイトを公開しました](https://zenn.dev/masuo/articles/2026-07-18-shiori-demo-site-launch)
+
+---
+
 ### Shiori のコアバリュー
 
 *   **ハイブリッド検索 (Hybrid Search)**: 単一の PostgreSQL 上で pgvector による多言語意味検索と、pgroonga による日本語検索を結合。軽量かつ高精度。
