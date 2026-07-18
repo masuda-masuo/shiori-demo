@@ -44,51 +44,91 @@ export default withMermaid(
     ],
     markdown: {
       config: (md) => {
-        md.renderer.rules.text = function(tokens, idx, options, env, self) {
-          let text = tokens[idx].content;
+        // Safe AST-level inline rule to parsing #num and repo#num links
+        md.inline.ruler.push('github_autolink', (state, silent) => {
+          const src = state.src;
+          const pos = state.pos;
           
-          const escapeHtml = (str) => str
-            .replace(/&/g, '&amp;')
-            .replace(/</g, '&lt;')
-            .replace(/>/g, '&gt;')
-            .replace(/"/g, '&quot;')
-            .replace(/'/g, '&#039;');
+          // 1. Single hash link: #num
+          const matchHash = src.slice(pos).match(/^#(\d+)\b/);
+          if (matchHash) {
+            // Prevent matching in link contexts already
+            if (state.linkLevel > 0) return false;
             
-          text = escapeHtml(text);
-          
-          // 1. Full repository format: owner/repo#num
-          text = text.replace(/([a-zA-Z0-9\-_]+\/[a-zA-Z0-9\-_]+)#(\d+)/g, (match, repo, num) => {
-            return `<a href="https://github.com/${repo}/issues/${num}" target="_blank" class="autolink">${match}</a>`;
-          });
-          
-          // 2. Short repository format: (shiori|sunaba|...)#num
-          const repoMap = {
-            "shiori": "masuda-masuo/shiori",
-            "sunaba": "masuda-masuo/sunaba",
-            "opencode-plugin-cc": "masuda-masuo/opencode-plugin-cc",
-            "opencode": "anomalyco/opencode",
-            "claude-code": "anthropics/claude-code",
-            "onyx": "onyx-dot-app/onyx"
-          };
-          const keys = Object.keys(repoMap).join("|");
-          const regexShort = new RegExp(`\\b(${keys})#(\\d+)`, "g");
-          text = text.replace(regexShort, (match, name, num) => {
-            const repo = repoMap[name];
-            return `<a href="https://github.com/${repo}/issues/${num}" target="_blank" class="autolink">${match}</a>`;
-          });
-          
-          // 3. Plain format: #num
-          text = text.replace(/(^|\s)#(\d+)\b/g, (match, space, num) => {
-            let defaultRepo = "masuda-masuo/shiori";
-            const relativePath = env.relativePath || "";
-            if (relativePath.includes("43") || relativePath.includes("649") || relativePath.includes("history") || relativePath.includes("sunaba")) {
-              defaultRepo = "masuda-masuo/sunaba";
+            if (!silent) {
+              const num = matchHash[1];
+              let defaultRepo = "masuda-masuo/shiori";
+              const relativePath = state.env.relativePath || "";
+              if (relativePath.includes("43") || relativePath.includes("649") || relativePath.includes("history") || relativePath.includes("sunaba")) {
+                defaultRepo = "masuda-masuo/sunaba";
+              }
+              
+              const token_o = state.push('link_open', 'a', 1);
+              token_o.attrs = [
+                ['href', `https://github.com/${defaultRepo}/issues/${num}`],
+                ['target', '_blank'],
+                ['class', 'autolink']
+              ];
+              
+              const token_t = state.push('text', '', 0);
+              token_t.content = `#${num}`;
+              
+              const token_c = state.push('link_close', 'a', -1);
             }
-            return `${space}<a href="https://github.com/${defaultRepo}/issues/${num}" target="_blank" class="autolink">#${num}</a>`;
-          });
+            state.pos += matchHash[0].length;
+            return true;
+          }
           
-          return text;
-        };
+          // 2. Repo hash link: repo#num or owner/repo#num
+          const matchRepo = src.slice(pos).match(/^([a-zA-Z0-9\-_\/]+)#(\d+)\b/);
+          if (matchRepo) {
+            if (state.linkLevel > 0) return false;
+            
+            const fullMatch = matchRepo[0];
+            const repoPath = matchRepo[1];
+            const num = matchRepo[2];
+            
+            // Skip syntax keywords to avoid breaking plugins
+            if (repoPath === 'sequenceDiagram' || repoPath.includes('Diagram')) {
+              return false;
+            }
+            
+            let targetRepo = repoPath;
+            const repoMap = {
+              "shiori": "masuda-masuo/shiori",
+              "sunaba": "masuda-masuo/sunaba",
+              "opencode-plugin-cc": "masuda-masuo/opencode-plugin-cc",
+              "opencode": "anomalyco/opencode",
+              "claude-code": "anthropics/claude-code",
+              "onyx": "onyx-dot-app/onyx"
+            };
+            
+            if (repoMap[repoPath]) {
+              targetRepo = repoMap[repoPath];
+            } else if (!repoPath.includes('/')) {
+              // Skip arbitrary single words to avoid breaking code context
+              return false;
+            }
+            
+            if (!silent) {
+              const token_o = state.push('link_open', 'a', 1);
+              token_o.attrs = [
+                ['href', `https://github.com/${targetRepo}/issues/${num}`],
+                ['target', '_blank'],
+                ['class', 'autolink']
+              ];
+              
+              const token_t = state.push('text', '', 0);
+              token_t.content = fullMatch;
+              
+              const token_c = state.push('link_close', 'a', -1);
+            }
+            state.pos += fullMatch.length;
+            return true;
+          }
+          
+          return false;
+        });
       }
     },
     mermaid: {
