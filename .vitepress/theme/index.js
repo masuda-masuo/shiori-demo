@@ -5,9 +5,10 @@ export default {
   extends: DefaultTheme,
   enhanceApp({ app }) {
     if (typeof window !== 'undefined') {
-      // Global click handler to toggle zoom on Mermaid wrappers
-      window.addEventListener('click', (e) => {
-        const wrapper = e.target.closest('.mermaid-wrapper');
+      // Document level click listener to handle dynamically loaded/swapped Mermaid containers
+      document.addEventListener('click', (e) => {
+        // Target .mermaid directly, or its closest ancestor
+        const wrapper = e.target.closest('.mermaid');
         if (wrapper) {
           wrapper.classList.toggle('zoomed');
           if (wrapper.classList.contains('zoomed')) {
@@ -17,7 +18,7 @@ export default {
           }
         } else {
           // If clicked outside, close any open zoomed wrapper
-          const openZoomed = document.querySelector('.mermaid-wrapper.zoomed');
+          const openZoomed = document.querySelector('.mermaid.zoomed');
           if (openZoomed) {
             openZoomed.classList.remove('zoomed');
             document.body.style.overflow = '';
@@ -26,9 +27,9 @@ export default {
       });
 
       // Press Escape key to close the zoom popup
-      window.addEventListener('keydown', (e) => {
+      document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-          const openZoomed = document.querySelector('.mermaid-wrapper.zoomed');
+          const openZoomed = document.querySelector('.mermaid.zoomed');
           if (openZoomed) {
             openZoomed.classList.remove('zoomed');
             document.body.style.overflow = '';
