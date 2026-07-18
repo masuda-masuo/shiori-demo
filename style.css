@@ -833,3 +833,26 @@ body {
     background: rgba(0, 242, 254, 0.05);
     border-radius: 3px;
 }
+
+/* Demo Notice Badge */
+.demo-badge-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+.demo-badge {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-glass);
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+.demo-badge i {
+    color: var(--accent-blue);
+}

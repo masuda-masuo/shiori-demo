@@ -13,7 +13,7 @@
     <!-- Icons & Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
     
     <!-- Markdown Parser & Mermaid -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -63,8 +63,15 @@
         <section class="hero-section" id="hero-sec">
             <h1 class="hero-title">Cross-Repository Intelligence for AI Agents</h1>
             <p class="hero-subtitle">
-                AIエージェントが、実在する有名OSSの障害（一次情報）をShioriで横断探索して自律執筆した、世界初の「AI失敗学」パターンライブラリ。
+                <strong>Shiori（栞）はブログ生成器ではありません。</strong>AIエージェントに「コードとIssueのポインタ」を提供する、超軽量な検索MCPサーバーです。<br>
+                本サイトは、<strong>AIエージェントが Shiori の検索機能をフル活用して一次情報をスキャンし、自律執筆した「技術コラム（成果物）」</strong>を展示するギャラリーデモです。
             </p>
+            <!-- Notice Badge -->
+            <div class="demo-badge-container">
+                <div class="demo-badge">
+                    <i class="fa-solid fa-circle-info"></i> Notice: 本サイトは、Shiori（検索MCP）を用いてAIエージェントが自律生成したコラムライブラリです。
+                </div>
+            </div>
             
             <!-- Shiori Interactive Search Box -->
             <div class="search-wrapper">
@@ -174,6 +181,6 @@
         </a>
     </div>
 
-    <script src="app.js?v=1.2"></script>
+    <script src="app.js?v=1.3"></script>
 </body>
 </html>
