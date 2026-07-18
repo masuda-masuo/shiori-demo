@@ -63,7 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // 3. 単発形式: #num (直後に </a> がないプレーンなハッシュに限定)
             text = text.replace(/(^|\s)#(\d+)\b(?!<\/a>)/g, (match, space, num) => {
-                const currentId = document.getElementById("detail-id-tag").textContent;
+                const detailIdElement = document.getElementById("detail-id-tag");
+                const currentId = detailIdElement ? detailIdElement.textContent : "";
                 
                 // コラム43番や、その他履歴（History）の時はデフォルトを sunaba にする
                 let defaultRepo = "masuda-masuo/shiori";
@@ -195,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         itemsGrid.style.display = "none";
         itemDetail.style.display = "block";
         aboutContent.style.display = "none";
+        contentSection.classList.remove("about-mode");
         
         // Render Detail Metadata
         detailTypeBadge.className = `item-badge badge-${item.type}`;
@@ -211,7 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const folder = item.type === "column" ? "columns" : "history";
             const response = await fetch(`content/${folder}/${item.filename}`);
             if (!response.ok) throw new Error("Markdown file not found.");
-            let markdown = await response.readText ? await response.readText() : await response.text();
+            let markdown = await response.text();
             
             // Clean title header from content to avoid duplicate H1
             markdown = markdown.replace(/^#\s+.+$/m, "");
