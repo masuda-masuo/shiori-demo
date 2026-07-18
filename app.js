@@ -110,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
             // Render UI
             renderLibrary();
             renderFeaturedList();
-            setupAboutContent();
             
         } catch (error) {
             console.error("Initialization error:", error);
@@ -234,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 preElement.parentNode.replaceChild(wrapper, preElement);
                 
                 try {
-                    const { svg } = await mermaid.render(`mermaid-svg-${index}`, code);
+                    const { svg } = await mermaid.render(`mermaid-svg-${index}`, code, wrapper);
                     wrapper.innerHTML = svg;
                 } catch (e) {
                     console.error("Mermaid parsing error:", e);
@@ -326,6 +325,9 @@ document.addEventListener("DOMContentLoaded", () => {
         heroSec.style.display = "none";
         sidebarSec.style.display = "none";
         contentSection.classList.add("about-mode");
+        
+        // Render About contents only after it is visible so Mermaid can measure widths
+        setupAboutContent();
         
         navLibrary.classList.remove("active");
         navAbout.classList.add("active");
@@ -503,7 +505,7 @@ AIエージェントの安全なオーケストレーション基盤との連携
             preElement.parentNode.replaceChild(wrapper, preElement);
             
             try {
-                const { svg } = await mermaid.render(`about-mermaid-svg-${index}`, code);
+                const { svg } = await mermaid.render(`about-mermaid-svg-${index}`, code, wrapper);
                 wrapper.innerHTML = svg;
             } catch (e) {
                 console.error("About Mermaid parsing error:", e);
