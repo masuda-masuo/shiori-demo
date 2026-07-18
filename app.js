@@ -37,6 +37,48 @@ document.addEventListener("DOMContentLoaded", () => {
     const featuredIncidentsList = document.getElementById("featured-incidents-list");
 
     // Initialize Markdown and Mermaid Options
+    const repoMap = {
+        "shiori": "masuda-masuo/shiori",
+        "sunaba": "masuda-masuo/sunaba",
+        "opencode-plugin-cc": "masuda-masuo/opencode-plugin-cc",
+        "opencode": "anomalyco/opencode",
+        "claude-code": "anthropics/claude-code",
+        "onyx": "onyx-dot-app/onyx"
+    };
+
+    const customRenderer = {
+        text(text) {
+            // 1. フルリポジトリ形式: owner/repo#num
+            text = text.replace(/([a-zA-Z0-9\-_]+\/[a-zA-Z0-9\-_]+)#(\d+)/g, (match, repo, num) => {
+                return `<a href="https://github.com/${repo}/issues/${num}" target="_blank" class="autolink">${match}</a>`;
+            });
+
+            // 2. ショートリポジトリ形式: (shiori|sunaba|...)#num
+            const keys = Object.keys(repoMap).join("|");
+            const regex = new RegExp(`\\b(${keys})#(\\d+)`, "g");
+            text = text.replace(regex, (match, name, num) => {
+                const repo = repoMap[name];
+                return `<a href="https://github.com/${repo}/issues/${num}" target="_blank" class="autolink">${match}</a>`;
+            });
+
+            // 3. 単発形式: #num (直後に </a> がないプレーンなハッシュに限定)
+            text = text.replace(/(^|\s)#(\d+)\b(?!<\/a>)/g, (match, space, num) => {
+                const currentId = document.getElementById("detail-id-tag").textContent;
+                
+                // コラム43番や、その他履歴（History）の時はデフォルトを sunaba にする
+                let defaultRepo = "masuda-masuo/shiori";
+                if (currentId.includes("43") || currentId.includes("649") || currentId.includes("history")) {
+                    defaultRepo = "masuda-masuo/sunaba";
+                }
+                return `${space}<a href="https://github.com/${defaultRepo}/issues/${num}" target="_blank" class="autolink">#${num}</a>`;
+            });
+
+            return text;
+        }
+    };
+
+    marked.use({ renderer: customRenderer });
+
     marked.setOptions({
         gfm: true,
         breaks: true,

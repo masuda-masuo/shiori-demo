@@ -802,3 +802,30 @@ body {
 .incident-card, .detail-view, .about-view {
     animation: fadeIn 0.4s ease-out forwards;
 }
+
+/* Autolink references (GitHub issue link inside body text) */
+.autolink {
+    color: var(--accent-indigo);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition-smooth);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    border-bottom: 1px dashed rgba(79, 172, 254, 0.4);
+    padding: 0 0.1rem;
+}
+.autolink::before {
+    content: "\f09b"; /* FontAwesome GitHub icon */
+    font-family: "Font Awesome 6 Brands";
+    font-size: 0.85em;
+    opacity: 0.7;
+    margin-right: 0.1rem;
+}
+.autolink:hover {
+    color: var(--accent-blue);
+    text-shadow: 0 0 8px rgba(0, 242, 254, 0.5);
+    border-bottom: 1px solid var(--accent-blue);
+    background: rgba(0, 242, 254, 0.05);
+    border-radius: 3px;
+}
