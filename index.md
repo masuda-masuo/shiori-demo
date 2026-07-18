@@ -30,6 +30,7 @@ features:
 :::
 
 <script setup>
+import { withBase } from 'vitepress'
 import { data as columns } from './columns/posts.data.js'
 import { data as histories } from './history/posts.data.js'
 import { ref, computed } from 'vue'
@@ -45,7 +46,7 @@ const allItems = computed(() => {
 
   <div class="archive-grid">
     <div v-for="item in allItems" :key="item.url" class="archive-card">
-      <a :href="item.url" class="archive-link">
+      <a :href="withBase(item.url)" class="archive-link">
         <div class="card-meta">
           <span class="item-badge" :class="item.url.includes('/columns/') ? 'badge-column' : 'badge-history'">
             {{ item.url.includes('/columns/') ? 'Column' : 'History' }}

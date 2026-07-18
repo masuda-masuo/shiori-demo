@@ -3,12 +3,13 @@
 Shiori（検索MCP）を用いてAIエージェントがバグ調査・インシデント解決を行った実走履歴の一覧です。
 
 <script setup>
+import { withBase } from 'vitepress'
 import { data as posts } from './posts.data.js'
 </script>
 
 <div class="posts-list">
   <div v-for="post in posts" :key="post.url" class="post-card">
-    <a :href="post.url" class="post-link">
+    <a :href="withBase(post.url)" class="post-link">
       <span class="post-id">#{{ post.id }}</span>
       <span class="post-title">{{ post.title }}</span>
     </a>
