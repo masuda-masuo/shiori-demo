@@ -91,6 +91,24 @@ export default withMermaid(
         };
       }
     },
+    mermaid: {
+      theme: 'dark',
+      themeVariables: {
+        fontSize: '18px',
+        actorFontSize: '18px',
+        noteFontSize: '16px',
+        messageFontSize: '16px',
+        fontFamily: 'Outfit, Inter, var(--vp-font-family-base)'
+      },
+      sequence: {
+        width: 240,       // Wide actor boxes
+        height: 65,
+        actorMargin: 180, // Generous spacing to spread diagram out
+        messageMargin: 45,
+        boxMargin: 10,
+        useMaxWidth: false // Do NOT force scaling down to container width
+      }
+    },
     themeConfig: {
       nav: [
         { text: 'Home', link: '/' },

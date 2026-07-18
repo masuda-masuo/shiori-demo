@@ -15,8 +15,8 @@
 
 /* Ensure SVG is readable and doesn't squash down to micro-size */
 .mermaid-wrapper svg {
-  min-width: 900px; /* Force minimum width to prevent scaling collapse */
-  max-width: 100%;
+  min-width: 1050px; /* Force minimum width to prevent scaling collapse */
+  max-width: none !important;
   height: auto !important;
   margin: 0 auto;
   display: block;
