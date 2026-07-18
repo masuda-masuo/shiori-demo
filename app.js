@@ -305,12 +305,15 @@ document.addEventListener("DOMContentLoaded", () => {
     // --------------------------------------------------------------------------
     // 4. Navigation & Views Control
     // --------------------------------------------------------------------------
+    const contentSection = document.querySelector(".content-section");
+
     function showGridView() {
         itemsGrid.style.display = "grid";
         itemDetail.style.display = "none";
         aboutContent.style.display = "none";
         heroSec.style.display = "block";
         sidebarSec.style.display = "block";
+        contentSection.classList.remove("about-mode");
         
         navLibrary.classList.add("active");
         navAbout.classList.remove("active");
@@ -322,6 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
         aboutContent.style.display = "block";
         heroSec.style.display = "none";
         sidebarSec.style.display = "none";
+        contentSection.classList.add("about-mode");
         
         navLibrary.classList.remove("active");
         navAbout.classList.add("active");

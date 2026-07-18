@@ -281,6 +281,10 @@ body {
     align-items: start;
 }
 
+.content-section.about-mode {
+    grid-template-columns: 1fr;
+}
+
 @media (max-width: 900px) {
     .content-section {
         grid-template-columns: 1fr;
