@@ -146,7 +146,7 @@ export default withMermaid(
         actorMargin: 180, // Generous spacing to spread diagram out
         messageMargin: 45,
         boxMargin: 10,
-        useMaxWidth: false // Do NOT force scaling down to container width
+        useMaxWidth: true
       }
     },
     themeConfig: {
