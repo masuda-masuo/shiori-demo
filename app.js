@@ -433,21 +433,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
 
-            <div class="markdown-body" style="margin-top: 3rem;">
-                <h3>インストール・設定方法</h3>
-                <p>Shiori は Docker Compose を使って一瞬で立ち上げられます。本番環境のソースコードや秘密鍵を汚さない、安全な override 方式を採用しています。</p>
-                <pre><code class="language-bash"># リポジトリの取得と移動
-git clone https://github.com/masuda-masuo/shiori.git
-cd shiori
-
-# 設定ファイルの作成 (SHIORI_REPOS と GITHUB_TOKEN を記述)
-cp .env.example .env
-
-# Docker コンテナのビルド ＆ 起動
-docker compose up -d --build
-
-# 初期インジェスト (自動的に埋め込みモデルをダウンロードし、索引化を行います)
-docker compose run --rm ingest</code></pre>
+            <div class="markdown-body" style="margin-top: 3.5rem; text-align: center; max-width: 650px; margin-left: auto; margin-right: auto; border-top: 1px solid var(--border-glass); padding-top: 2.5rem;">
+                <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">インストール ＆ セットアップ（Coming Soon）</h3>
+                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                    現在、Shiori はプライベートベータ版として開発・実走テストが行われています。<br>
+                    AIエージェントの安全なオーケストレーション基盤との連携を含む「Public Release版（OSS公開）」のローンチに伴い、Docker Compose を用いた簡単なセットアップ手順をここに公開予定です。
+                </p>
+                <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--accent-blue); background: rgba(0, 242, 254, 0.05); border: 1px solid var(--border-hover); padding: 0.5rem 1rem; border-radius: 30px;">
+                    <i class="fa-solid fa-code-fork"></i> Public Release Roadmap under construction
+                </div>
             </div>
         `;
     }
