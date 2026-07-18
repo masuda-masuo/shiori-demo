@@ -387,71 +387,133 @@ document.addEventListener("DOMContentLoaded", () => {
     // 6. About Page Setup (Markdowns inside JS)
     // --------------------------------------------------------------------------
     function setupAboutContent() {
-        aboutContent.innerHTML = `
-            <div class="about-hero">
-                <svg viewBox="0 0 100 100" class="about-logo-large">
-                    <rect x="25" y="15" width="50" height="70" rx="8" fill="none" stroke="url(#logo-grad-l)" stroke-width="5"/>
-                    <path d="M45 15 L45 85" stroke="url(#logo-grad-l)" stroke-width="4" stroke-dasharray="4 4"/>
-                    <path d="M60 30 L75 30 M60 45 L75 45 M60 60 L70 60" stroke="url(#logo-grad-l)" stroke-width="4" stroke-linecap="round"/>
-                    <rect x="35" y="25" width="6" height="50" rx="3" fill="url(#logo-grad-l)"/>
-                    <defs>
-                        <linearGradient id="logo-grad-l" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#00f2fe" />
-                            <stop offset="100%" stop-color="#4facfe" />
-                        </linearGradient>
-                    </defs>
-                </svg>
-                <h2 class="about-title">About Shiori</h2>
-                <p class="about-subtitle">AIエージェントに「一次ソースコードとIssue」のクロスリンク情報を提供する、超軽量・高精度なナレッジベース。</p>
-            </div>
+        const aboutMarkdown = `
+# About Shiori
 
-            <div class="markdown-body">
-                <h3>このサイトと Shiori の関係</h3>
-                <p>
-                    <strong>Shiori（栞）自体は、ドキュメントやコラムを自動生成するシステムではありません。</strong><br>
-                    Shiori は、AIエージェントに対してプロジェクトの「一次ソースコード」「ADR（意思決定）」「関連Issue/PR」を一本の糸で繋いだ高精度なポインタを返す **「検索・ナビゲーションMCPサーバー（裏方）」** です。
-                </p>
-                <p>
-                    本サイトに掲載されている43本の「AI失敗学」コラムは、<strong>Shiori のポインタ検索能力をフル活用したAIエージェント（Gemini）が、ハルシネーションを完全に排除して自律的に執筆・合成した「成果物の実例（デモギャラリー）」</strong>です。
-                </p>
-                
-                <blockquote>
-                    <strong>「AIに嘘を吐かせたくなければ、真実へのポインタだけを渡せ」</strong>
-                    <br>—— Shiori が掲げる「Pointer-then-Fetch」の基本哲学
-                </blockquote>
-            </div>
+AIエージェントに「一次ソースコードとIssue」のクロスリンク情報を提供する、超軽量・高精度なナレッジベース。
 
-            <div class="about-grid">
-                <div class="about-feature">
-                    <div class="feature-icon-wrapper"><i class="fa-solid fa-bolt feature-icon"></i></div>
-                    <h4 class="feature-title">ハイブリッド検索 (Hybrid Search)</h4>
-                    <p class="feature-desc">単一の PostgreSQL 上で pgvector による多言語意味検索と、pgroonga による日本語厳密キーワード検索を結合。8GBのメモリ制約下でも超高速・超軽量に動きます。</p>
-                </div>
+---
 
-                <div class="about-feature">
-                    <div class="feature-icon-wrapper"><i class="fa-solid fa-link feature-icon"></i></div>
-                    <h4 class="feature-title">クロス・リファレンス</h4>
-                    <p class="feature-desc">Issue → Pull Request → Commit Diff → Code の行番号に至るまで、開発プロセスの全ライフサイクルを1本に束ねて検索可能。AIが文脈を見失うことを防ぎます。</p>
-                </div>
+### このサイトと Shiori の関係
 
-                <div class="about-feature">
-                    <div class="feature-icon-wrapper"><i class="fa-solid fa-shield-halved feature-icon"></i></div>
-                    <h4 class="feature-title">AIファースト設計</h4>
-                    <p class="feature-desc">FastMCP 規格に準拠した13の精密なMCPツールを提供。AIエージェントが、人間にいちいち聞かずに「証拠（過去のADRやインシデント）」に基づいて行動方針を判断できます。</p>
-                </div>
-            </div>
+**Shiori（栞）自体は、ドキュメントやコラムを自動生成するシステムではありません。**  
+Shiori は、AIエージェントに対してプロジェクトの「一次ソースコード」「ADR（意思決定）」「関連Issue/PR」を一本の糸で繋いだ高精度なポインタを返す **「検索・ナビゲーションMCPサーバー（裏方）」** です。
 
-            <div class="markdown-body" style="margin-top: 3.5rem; text-align: center; max-width: 650px; margin-left: auto; margin-right: auto; border-top: 1px solid var(--border-glass); padding-top: 2.5rem;">
-                <h3 style="font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">インストール ＆ セットアップ（Coming Soon）</h3>
-                <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem;">
-                    現在、Shiori はプライベートベータ版として開発・実走テストが行われています。<br>
-                    AIエージェントの安全なオーケストレーション基盤との連携を含む「Public Release版（OSS公開）」のローンチに伴い、Docker Compose を用いた簡単なセットアップ手順をここに公開予定です。
-                </p>
-                <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--accent-blue); background: rgba(0, 242, 254, 0.05); border: 1px solid var(--border-hover); padding: 0.5rem 1rem; border-radius: 30px;">
-                    <i class="fa-solid fa-code-fork"></i> Public Release Roadmap under construction
-                </div>
-            </div>
+本サイトに掲載されている43本の「AI失敗学」コラムは、**Shiori のポインタ検索能力をフル活用したAIエージェント（Gemini）が、ハルシネーションを完全に排除して自律的に執筆・合成した「成果物の実例（デモギャラリー）」**です。
+
+> **「AIに嘘を吐かせたくなければ、真実へのポインタだけを渡せ」**  
+> —— Shiori が掲げる「Pointer-then-Fetch」の基本哲学
+
+---
+
+### AIエージェントと Shiori の連携フロー
+
+開発者がAIに指示を出した際、エージェントはShioriをRAGのインフラとして活用し、以下のシーケンスで情報探索とコード変更を行います。
+
+\`\`\`mermaid
+sequenceDiagram
+    autonumber
+    actor User as 開発者 (人間)
+    participant Agent as AIエージェント
+    participant Shiori as Shiori (検索MCP)
+    participant GitHub as GitHub (Clones/API)
+
+    User->>Agent: 「#649のテスト失敗の原因と修正案を教えて」
+    
+    Note over Agent: 1. Shioriのハイブリッド検索を呼び出す
+    Agent->>Shiori: shiori_search(query="container.py #649 test fail")
+    
+    Note over Shiori: pgvector(意味) + pgroonga(全文) で横断検索
+    Shiori-->>Agent: Pointers only: [tools/container.py:111-130, issue#649]
+    
+    Note over Agent: 2. ポインタを評価し、必要なコードだけを取得 (Pointer-then-Fetch)
+    Agent->>Shiori: shiori_read_file(path="tools/container.py", lines="111-130")
+    Shiori-->>Agent: 【コード実体】 ec, out = container.exec_run(...)
+    
+    Agent->>GitHub: shiori_read_issue(number=649)
+    GitHub-->>Agent: 【Issueコメント】 "expected 2 values to unpack..."
+    
+    Note over Agent: 3. 最小のコンテキストで正確に原因を特定
+    Agent-->>User: 原因特定：「モックのパッチパスがズレて実コードが走り、アンパックエラーが発生しています。修正箇所は...」
+\`\`\`
+
+#### 🛠️ 実際のMCPツール連携イメージ (JSON)
+
+AIエージェントは、Shioriが提供するMCPツールを以下のようにJSONプロトコル経由で呼び出し、必要な事実（ポインタ）だけをすくい取ります。
+
+\`\`\`json
+// 1. まず「意味（コンセプト）」と「キーワード」で横断検索する
+// Tool Call: shiori_search
+{
+  "query": "generator.throw database operational error",
+  "repo": "masuda-masuo/sunaba"
+}
+
+// Response from Shiori (必要な情報への「ポインタ」だけを返す)
+{
+  "hits": [
+    {
+      "type": "code",
+      "path": "tools/vcs.py",
+      "lines": "1269-1285",
+      "snippet": "def publish(repo_name, branch_name): ..."
+    },
+    {
+      "type": "issue",
+      "url": "https://github.com/masuda-masuo/sunaba/issues/42",
+      "title": "Fix database lock leak on exception throw in vcs.py"
+    }
+  ]
+}
+\`\`\`
+
+---
+
+### Shiori のコアバリュー
+
+*   **ハイブリッド検索 (Hybrid Search)**: 単一の PostgreSQL 上で pgvector による多言語意味検索と、pgroonga による日本語検索を結合。軽量かつ高精度。
+*   **クロス・リファレンス**: Issue → PR → Diff → Code の行番号に至るまで、開発プロセスの全ライフサイクルを1本に束ねて検索可能。
+*   **AIファースト設計**: FastMCP 規格に準拠した13の精密なMCPツールを提供。
+
+---
+
+### インストール ＆ セットアップ（Coming Soon）
+
+現在、Shiori はプライベートベータ版として開発・実走テストが行われています。  
+AIエージェントの安全なオーケストレーション基盤との連携を含む「Public Release版（OSS公開）」のローンチに伴い、Docker Compose を用いた簡単なセットアップ手順をここに公開予定です。
+
+<div style="text-align: center; margin-top: 1.5rem;">
+  <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--accent-blue); background: rgba(0, 242, 254, 0.05); border: 1px solid var(--border-hover); padding: 0.5rem 1rem; border-radius: 30px;">
+      <i class="fa-solid fa-code-fork"></i> Public Release Roadmap under construction
+  </div>
+</div>
         `;
+
+        // Parse Markdown and Render
+        aboutContent.innerHTML = marked.parse(aboutMarkdown);
+        
+        // Highlight Code
+        Prism.highlightAllUnder(aboutContent);
+        
+        // Render Mermaid
+        const mermaidBlocks = aboutContent.querySelectorAll(".language-mermaid");
+        mermaidBlocks.forEach((block, index) => {
+            const code = block.textContent;
+            const containerId = `about-mermaid-diag-${index}`;
+            const wrapper = document.createElement("div");
+            wrapper.className = "mermaid-wrapper";
+            wrapper.id = containerId;
+            block.parentNode.replaceChild(wrapper, block);
+            
+            try {
+                mermaid.render(`about-mermaid-svg-${index}`, code, (svgCode) => {
+                    wrapper.innerHTML = svgCode;
+                });
+            } catch (e) {
+                console.error("About Mermaid parsing error:", e);
+                wrapper.innerHTML = `<div class="error-msg">Mermaid図の描画に失敗しました。</div>`;
+            }
+        });
     }
 
     // Run Initializer
