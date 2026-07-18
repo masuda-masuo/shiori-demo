@@ -436,15 +436,18 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="markdown-body" style="margin-top: 3rem;">
                 <h3>インストール・設定方法</h3>
                 <p>Shiori は Docker Compose を使って一瞬で立ち上げられます。本番環境のソースコードや秘密鍵を汚さない、安全な override 方式を採用しています。</p>
-                <pre><code class="language-bash"># リポジトリの取得
+                <pre><code class="language-bash"># リポジトリの取得と移動
 git clone https://github.com/masuda-masuo/shiori.git
 cd shiori
 
-# Docker コンテナの起動
-docker compose up -d
+# 設定ファイルの作成 (SHIORI_REPOS と GITHUB_TOKEN を記述)
+cp .env.example .env
 
-# リポジトリのインジェスト（索引化）
-python3 -m shiori ingest</code></pre>
+# Docker コンテナのビルド ＆ 起動
+docker compose up -d --build
+
+# 初期インジェスト (自動的に埋め込みモデルをダウンロードし、索引化を行います)
+docker compose run --rm ingest</code></pre>
             </div>
         `;
     }
