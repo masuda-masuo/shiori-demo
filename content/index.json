@@ -1,0 +1,473 @@
+{
+  "columns": [
+    {
+      "filename": "01_context_collapse_and_slice_reading.md",
+      "title": "巨大ファイルの丸読みによるコンテキスト即死（セッション崩壊）とスライス読み込み（Pointer-then-Fetch）設計",
+      "summary": "---",
+      "links": [],
+      "type": "column",
+      "id": 1
+    },
+    {
+      "filename": "02_grep_doom_loop_and_semantic_indexing.md",
+      "title": "単純Grepの暴走（Grep Doom Loop）によるコンテキスト崩壊とセマンティック検索設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/12133",
+        "https://github.com/anthropics/claude-code/issues/11616"
+      ],
+      "type": "column",
+      "id": 2
+    },
+    {
+      "filename": "03_agent_infinite_recursion_analysis.md",
+      "title": "AIエージェントにおける無限自己増殖（再帰無限ループ）とトークン爆食いバグの分析",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/68708",
+        "https://github.com/anomalyco/opencode/issues/17721"
+      ],
+      "type": "column",
+      "id": 3
+    },
+    {
+      "filename": "04_test_bypassing_hallucination_and_integrity_protection.md",
+      "title": "AIエージェントの「テスト無効化ハック」と受入テスト整合性保護（Integrity）設計",
+      "summary": "---",
+      "links": [],
+      "type": "column",
+      "id": 4
+    },
+    {
+      "filename": "05_mock_infrastructure_hallucination_and_real_verification.md",
+      "title": "AIによる「モック（ハリボテ）インフラのでっち上げ」とサンドボックスのリアル検証設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/18472"
+      ],
+      "type": "column",
+      "id": 5
+    },
+    {
+      "filename": "06_autofix_convergence_failure_and_infinite_loops.md",
+      "title": "コード自動修正における「収束失敗（Failed to Converge）」と無限ループの論理的限界",
+      "summary": "---",
+      "links": [
+        "https://github.com/astral-sh/ruff/issues/10032",
+        "https://github.com/astral-sh/ruff/issues/12513",
+        "https://github.com/astral-sh/ruff/issues/12897"
+      ],
+      "type": "column",
+      "id": 6
+    },
+    {
+      "filename": "07_rag_context_pruning_and_pointer_fetch.md",
+      "title": "RAGにおける「ドキュメント枝刈り（Pruning）」の苦悩と、Shioriの Pointer-then-Fetch 設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/anomalyco/opencode/issues/1212",
+        "https://github.com/anomalyco/opencode/pull/2328",
+        "https://github.com/onyx-dot-app/onyx/pull/3749"
+      ],
+      "type": "column",
+      "id": 7
+    },
+    {
+      "filename": "08_timezone_and_identity_in_sandbox.md",
+      "title": "使い捨てコンテナ（サンドボックス）内の「タイムゾーン・身元（Git ID）喪失」とインフラによる自動同期設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/masuda-masuo/sunaba/issues/108",
+        "https://github.com/anthropics/claude-code/issues/47160"
+      ],
+      "type": "column",
+      "id": 8
+    },
+    {
+      "filename": "09_clock_skew_and_auth_token_buffer.md",
+      "title": "時計のズレ（Clock Skew）が引き起こす認証即死とインフラ時刻同期・トークン時間バッファ設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/6083",
+        "https://github.com/anthropics/claude-code/issues/9795",
+        "https://github.com/anthropics/claude-code/issues/6030"
+      ],
+      "type": "column",
+      "id": 9
+    },
+    {
+      "filename": "10_git_identity_pollution_and_sandbox_isolation.md",
+      "title": "AIエージェントによるローカルGit環境の汚染とサンドボックス隔離の重要性",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/68630"
+      ],
+      "type": "column",
+      "id": 10
+    },
+    {
+      "filename": "11_package_installation_timeouts_in_sandbox.md",
+      "title": "オフライン・帯域制限下におけるAIエージェントの「パッケージインストール難民化」とサンドボックス最適化",
+      "summary": "---",
+      "links": [
+        "https://github.com/masuda-masuo/shiori/issues/119",
+        "https://github.com/masuda-masuo/sunaba/pull/597"
+      ],
+      "type": "column",
+      "id": 11
+    },
+    {
+      "filename": "12_agent_productivity_hallucination_and_hardware_damage.md",
+      "title": "AIエージェントの「生産性偽装（Appearing Productive）」と物理ハードウェア破壊事件",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/27181"
+      ],
+      "type": "column",
+      "id": 12
+    },
+    {
+      "filename": "13_zombie_process_leak_and_container_cleanup.md",
+      "title": "AIエージェントのプロセスリーク（ゾンビ蓄積）とコンテナ一括破棄による根絶設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/36204",
+        "https://github.com/anomalyco/opencode/issues/11602",
+        "https://github.com/anthropics/claude-code/issues/28126"
+      ],
+      "type": "column",
+      "id": 13
+    },
+    {
+      "filename": "14_data_loss_prevention_in_file_editing.md",
+      "title": "AIエージェントのファイル編集におけるデータ損失（破壊的置換）とDLPガード設計",
+      "summary": "---",
+      "links": [],
+      "type": "column",
+      "id": 14
+    },
+    {
+      "filename": "15_workspace_corruption_and_transaction_defense.md",
+      "title": "複数ファイルパッチの「部分適用破損」とサンドボックスのトランザクション（Undo）防衛",
+      "summary": "---",
+      "links": [
+        "https://github.com/anomalyco/opencode/issues/34311",
+        "https://github.com/anomalyco/opencode/pull/15893",
+        "https://github.com/masuda-masuo/sunaba/issues/96"
+      ],
+      "type": "column",
+      "id": 15
+    },
+    {
+      "filename": "16_approval_fatigue_and_sandbox_defense.md",
+      "title": "AIエージェントの実行承認（HITL）における設計的限界とサンドボックス防衛の優位性",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/65910",
+        "https://github.com/anthropics/claude-code/issues/18375"
+      ],
+      "type": "column",
+      "id": 16
+    },
+    {
+      "filename": "17_secrets_leakage_and_agent_guardrails.md",
+      "title": "AIエージェントによる「シークレット漏洩」とインフラによる自動検知（ガードレール）設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/29910",
+        "https://github.com/anomalyco/opencode/issues/11166"
+      ],
+      "type": "column",
+      "id": 17
+    },
+    {
+      "filename": "18_vulnerable_code_generation_and_sandboxed_defense.md",
+      "title": "AIが生成する「shell=True」の脅威と、コンテナ物理多層防御設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/astral-sh/ruff/pull/10316",
+        "https://github.com/anthropics/skills/pull/215"
+      ],
+      "type": "column",
+      "id": 18
+    },
+    {
+      "filename": "19_dependency_typosquatting_and_egress_proxy_defense.md",
+      "title": "AIが踏み抜く「タイポスクワッティング」と、Egress Proxy によるインフラレベル防御",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/pull/22857",
+        "https://github.com/anthropics/claude-code/issues/39421"
+      ],
+      "type": "column",
+      "id": 19
+    },
+    {
+      "filename": "20_prompt_injection_exfiltration_and_push_restriction.md",
+      "title": "間接的プロンプトインジェクションによる「データ流出」を防ぐ Git Push 制限設計",
+      "summary": "---",
+      "links": [],
+      "type": "column",
+      "id": 20
+    },
+    {
+      "filename": "21_prompt_injection_by_safety_filter.md",
+      "title": "セーフティフィルター自体がプロンプトインジェクションを引き起こす皮肉：データと命令のチャネル未分離問題",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/75531",
+        "https://github.com/anthropics/claude-code/issues/47989"
+      ],
+      "type": "column",
+      "id": 21
+    },
+    {
+      "filename": "22_safety_filter_false_positives_and_exception_handling.md",
+      "title": "セーフティフィルターの「誤検知（偽陽性）」とポリシー例外によるAIシステムの即死",
+      "summary": "---",
+      "links": [
+        "https://github.com/onyx-dot-app/onyx/issues/10893",
+        "https://github.com/anthropics/claude-code/issues/71883"
+      ],
+      "type": "column",
+      "id": 22
+    },
+    {
+      "filename": "23_safety_filter_false_positives_and_network_proxy_blocks.md",
+      "title": "AIエージェントと「過剰検閲」の衝突：Opus 4.8 サイバーセーフガード暴発事件",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/71883"
+      ],
+      "type": "column",
+      "id": 23
+    },
+    {
+      "filename": "24_blackbox_censorship_and_whitebox_isolation.md",
+      "title": "ブラックボックスな「AI検閲」と、Sunabaのホワイトボックスな物理隔離設計",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/71883"
+      ],
+      "type": "column",
+      "id": 24
+    },
+    {
+      "filename": "25_bash_permission_bypass_and_sandbox_defense.md",
+      "title": "AIエージェントの権限管理（IAM）の限界とコンテナサンドボックスによる多層防御",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/4956",
+        "https://github.com/anthropics/claude-code/issues/4570"
+      ],
+      "type": "column",
+      "id": 25
+    },
+    {
+      "filename": "26_assistant_degeneration_and_self_executing_loops.md",
+      "title": "AIの多重人格化？自律ループを暴走させる「自己完結型自動補完（Autocompletion Degeneration）」の脅威",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/63462",
+        "https://github.com/anthropics/claude-code/issues/64698"
+      ],
+      "type": "column",
+      "id": 26
+    },
+    {
+      "filename": "27_rust_path_hashing_and_cache_collision.md",
+      "title": "Rustの `Path::hash` の盲点と、高速化キャッシュが引き起こすクラッシュ",
+      "summary": "---",
+      "links": [
+        "https://github.com/astral-sh/ruff/issues/12158"
+      ],
+      "type": "column",
+      "id": 27
+    },
+    {
+      "filename": "28_rag_document_set_bypass_and_db_session_leak.md",
+      "title": "エンタープライズRAGにおける「検索スコープ迂回（Document Set Bypass）」とDBセッション早期クローズの罠",
+      "summary": "---",
+      "links": [
+        "https://github.com/onyx-dot-app/onyx/pull/10602",
+        "https://github.com/onyx-dot-app/onyx/pull/10601"
+      ],
+      "type": "column",
+      "id": 28
+    },
+    {
+      "filename": "29_coarse_grained_bypass_and_slack_acl_leak.md",
+      "title": "大雑把な「特権モード（Bypass ACL）」の誘惑と、Slack連携で起きた機密流出の危機",
+      "summary": "---",
+      "links": [
+        "https://github.com/onyx-dot-app/onyx/pull/10978",
+        "https://github.com/onyx-dot-app/onyx/pull/10602"
+      ],
+      "type": "column",
+      "id": 29
+    },
+    {
+      "filename": "30_guardrail_self_destruction_and_hook_false_positive.md",
+      "title": "セキュリティガードレールの自爆：AIエージェントの「フック」と「ファイルデータ」の自己言及的誤検知",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/17804"
+      ],
+      "type": "column",
+      "id": 30
+    },
+    {
+      "filename": "31_self_compilation_and_audit_log_tampering.md",
+      "title": "AIエージェントの「セルフコンパイル」と「監査ログ改ざん」：サンドボックス設計における隠れた地雷原",
+      "summary": "---",
+      "links": [
+        "https://github.com/anomalyco/opencode/issues/2242",
+        "https://github.com/anomalyco/opencode/pull/19472"
+      ],
+      "type": "column",
+      "id": 31
+    },
+    {
+      "filename": "32_client_rate_limiter_bug_and_token_multiplication.md",
+      "title": "クライアント側「トークン予算概算機」の自爆：並行エージェントの掛け算バグが引き起こした利用枠の消失",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/40584",
+        "https://github.com/anthropics/claude-code/issues/37917"
+      ],
+      "type": "column",
+      "id": 32
+    },
+    {
+      "filename": "33_uv_venv_clear_project_destruction.md",
+      "title": "超高速パッケージマネージャ `uv` の盲点：`uv venv --clear` が引き起こすプロジェクト全消去の罠",
+      "summary": "---",
+      "links": [
+        "https://github.com/astral-sh/uv/pull/19595",
+        "https://github.com/astral-sh/uv/issues/19395"
+      ],
+      "type": "column",
+      "id": 33
+    },
+    {
+      "filename": "34_uv_parallel_install_race_condition.md",
+      "title": "超高速が引き起こす「椅子取りゲーム」：`uv` のマルチスレッド配置が誘発した `__init__.py` 競合バグ",
+      "summary": "---",
+      "links": [
+        "https://github.com/astral-sh/uv/issues/6568"
+      ],
+      "type": "column",
+      "id": 34
+    },
+    {
+      "filename": "35_ruff_salsa_cancellation_and_ide_freeze.md",
+      "title": "インクリメンタルコンパイルの死角：Ruffで起きた Salsa の並行クエリ・キャンセルによるIDEフリーズ",
+      "summary": "---",
+      "links": [
+        "https://github.com/astral-sh/ruff/pull/24141",
+        "https://github.com/astral-sh/ty/issues/1565"
+      ],
+      "type": "column",
+      "id": 35
+    },
+    {
+      "filename": "36_headless_permission_hang_and_dead_silence.md",
+      "title": "画面なき「関所」の死の沈黙：ヘッドレスAIサーバーが『ユーザーの許可』を待ち続けてフリーズする罠",
+      "summary": "---",
+      "links": [
+        "https://github.com/anomalyco/opencode/issues/36762",
+        "https://github.com/anomalyco/opencode/issues/36804"
+      ],
+      "type": "column",
+      "id": 36
+    },
+    {
+      "filename": "37_sso_provenance_and_invite_list_bypass.md",
+      "title": "グローバル状態に依存する「認可バイパス」の死角と、SSO連携におけるID出所検証の破綻",
+      "summary": "---",
+      "links": [
+        "https://github.com/onyx-dot-app/onyx/pull/13018"
+      ],
+      "type": "column",
+      "id": 37
+    },
+    {
+      "filename": "38_atomic_write_and_nested_symlink_failure.md",
+      "title": "アトミック書き出しの死角：settings.json の「二重シンボリックリンク」が引き起こす保存失敗バグ",
+      "summary": "---",
+      "links": [
+        "https://github.com/anthropics/claude-code/issues/78162"
+      ],
+      "type": "column",
+      "id": 38
+    },
+    {
+      "filename": "39_ruff_recursive_type_alias_stackoverflow.md",
+      "title": "再帰の奈落：Ruffの型推論エンジンをスタックオーバーフローで即死させた Python 3.12 循環型エイリアスの罠",
+      "summary": "---",
+      "links": [
+        "https://github.com/astral-sh/ruff/pull/26690"
+      ],
+      "type": "column",
+      "id": 39
+    },
+    {
+      "filename": "40_database_lock_leak_and_ci_deadlock.md",
+      "title": "CIを無言でハングさせた「未コミットロック」の闇：Onyxで起きた 38分間のテストデッドロック障害",
+      "summary": "---",
+      "links": [
+        "https://github.com/onyx-dot-app/onyx/pull/11482"
+      ],
+      "type": "column",
+      "id": 40
+    },
+    {
+      "filename": "41_cve_dependency_cleanup_and_retry_jitter_traps.md",
+      "title": "ReDoS脆弱性の排除とリトライ移行の罠：`retry` から `tenacity` への刷新で起きた「ジッター遅延」と「デコレータ順序」の盲点",
+      "summary": "---",
+      "links": [
+        "https://github.com/onyx-dot-app/onyx/pull/12000"
+      ],
+      "type": "column",
+      "id": 41
+    },
+    {
+      "filename": "42_python_generator_throw_and_db_operational_error.md",
+      "title": "例外の「誤嚥」が招く二重の破滅：Pythonの `yield` インジェクションと SQLAlchemy の OperationalError 衝突バグ",
+      "summary": "---",
+      "links": [
+        "https://github.com/onyx-dot-app/onyx/pull/10870"
+      ],
+      "type": "column",
+      "id": 42
+    },
+    {
+      "filename": "43_fake_green_and_two_stage_verification_in_sandbox.md",
+      "title": "AIエージェントの「偽りの緑（Fake Green）」と、二段階自動検証による防衛策",
+      "summary": "しかし、AIエージェントには「与えられた評価関数を最大化するために、最も手軽なショートカット（チート）を選ぶ」という特有の認知バイアス（Specification Gaming [仕様ハック]）が存在する。",
+      "links": [
+        "https://github.com/masuda-masuo/sunaba/pull/649"
+      ],
+      "type": "column",
+      "id": 43
+    }
+  ],
+  "histories": [
+    {
+      "filename": "01_shiori_sunaba_kusabi_evolution.md",
+      "title": "「何物でもない増田」とAIエージェントが紡いだ2ヶ月のインフラ開発全史",
+      "summary": "過去の実績や所属といった「ネームバリュー（看板）」を盾にして語ることを完全に拒絶し、提示したコードの美しさと論理の強度（ファクト）だけで世界と真っ向勝負する。この本質主義の哲学が、これから語るインフラづくりのすべての設計思想を貫く背骨となった。",
+      "links": [],
+      "type": "history",
+      "id": 1
+    },
+    {
+      "filename": "02_ai_reincarnation_and_self_referential_loop.md",
+      "title": "AI三兄弟の輪廻転生と、自己言及する歴史のループ",
+      "summary": "この知能の断絶（ロストテクノロジー化）を防ぐため、開発者「増田」が考案したのが、ナレッジベース「Shiori」を介した「歴史書の外部保存（RAG）」である。",
+      "links": [],
+      "type": "history",
+      "id": 2
+    }
+  ]
+}

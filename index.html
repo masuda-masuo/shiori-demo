@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiori — AI Agent Incident Library & Demo</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons & Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Markdown Parser & Mermaid -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+</head>
+<body>
+    <!-- Background glow elements -->
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo" id="btn-home">
+                <svg viewBox="0 0 100 100" class="logo-icon">
+                    <rect x="25" y="15" width="50" height="70" rx="8" fill="none" stroke="url(#logo-grad)" stroke-width="5"/>
+                    <path d="M45 15 L45 85" stroke="url(#logo-grad)" stroke-width="4" stroke-dasharray="4 4"/>
+                    <path d="M60 30 L75 30 M60 45 L75 45 M60 60 L70 60" stroke="url(#logo-grad)" stroke-width="4" stroke-linecap="round"/>
+                    <rect x="35" y="25" width="6" height="50" rx="3" fill="url(#logo-grad)"/>
+                    <defs>
+                        <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00f2fe" />
+                            <stop offset="100%" stop-color="#4facfe" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="logo-text">Shiori</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-link active" id="nav-library">Incident Library</a>
+                <a href="#" class="nav-link" id="nav-about">About Shiori</a>
+                <a href="https://github.com/masuda-masuo/shiori" target="_blank" class="github-icon-link">
+                    <i class="fab fa-github"></i>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="main-container">
+        
+        <!-- ================= HERO & SEARCH SECTION ================= -->
+        <section class="hero-section" id="hero-sec">
+            <h1 class="hero-title">Cross-Repository Intelligence for AI Agents</h1>
+            <p class="hero-subtitle">
+                AIエージェントが、実在する有名OSSの障害（一次情報）をShioriで横断探索して自律執筆した、世界初の「AI失敗学」パターンライブラリ。
+            </p>
+            
+            <!-- Shiori Interactive Search Box -->
+            <div class="search-wrapper">
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="search-input" placeholder="例外誤嚥, 幽霊ターン, generator throw, #649 などで検索..." autocomplete="off">
+                    <i class="fa-solid fa-circle-xmark clear-icon" id="search-clear" style="display: none;"></i>
+                </div>
+                <div class="search-hint">
+                    <span class="hint-label">Try searching:</span>
+                    <span class="tag-keyword">generator throw</span>
+                    <span class="tag-keyword">幽霊ターン</span>
+                    <span class="tag-keyword">二段階検証</span>
+                    <span class="tag-keyword">RAG</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTENT LAYOUT ================= -->
+        <section class="content-section">
+            <!-- Sidebar for Filter & Navigation -->
+            <aside class="sidebar" id="sidebar-sec">
+                <div class="sidebar-block">
+                    <h3 class="sidebar-title">Categories</h3>
+                    <div class="category-list">
+                        <button class="cat-btn active" data-type="all">
+                            <span class="cat-name">All Items</span>
+                            <span class="cat-count" id="count-all">0</span>
+                        </button>
+                        <button class="cat-btn" data-type="column">
+                            <span class="cat-name">Incident Columns</span>
+                            <span class="cat-count" id="count-column">0</span>
+                        </button>
+                        <button class="cat-btn" data-type="history">
+                            <span class="cat-name">Development Histories</span>
+                            <span class="cat-count" id="count-history">0</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="sidebar-block">
+                    <h3 class="sidebar-title">Featured Incidents</h3>
+                    <div class="featured-list" id="featured-incidents-list">
+                        <!-- Dynamic Featured Links -->
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Card Grid or Column Details -->
+            <div class="content-body">
+                <!-- GRID VIEW (List of Cards) -->
+                <div class="grid-view" id="items-grid">
+                    <!-- Cards dynamically injected here -->
+                </div>
+
+                <!-- DETAIL VIEW (Single Article) -->
+                <div class="detail-view" id="item-detail" style="display: none;">
+                    <div class="detail-actions">
+                        <button class="back-btn" id="btn-back-grid">
+                            <i class="fa-solid fa-arrow-left"></i> 一覧に戻る
+                        </button>
+                        <div class="detail-meta">
+                            <span class="item-badge" id="detail-type-badge">Column</span>
+                            <span class="item-id-tag" id="detail-id-tag">#43</span>
+                        </div>
+                    </div>
+                    
+                    <!-- OGP Hover Link Cards Container -->
+                    <div class="github-references-panel" id="detail-github-refs" style="display: none;">
+                        <h4 class="panel-title">Linked GitHub References</h4>
+                        <div class="github-cards-grid" id="github-refs-grid">
+                            <!-- Injected live-looking mock GitHub cards -->
+                        </div>
+                    </div>
+
+                    <article class="markdown-body" id="markdown-content">
+                        <!-- Dynamic Markdown content goes here -->
+                    </article>
+                </div>
+
+                <!-- ABOUT VIEW -->
+                <div class="about-view" id="about-content" style="display: none;">
+                    <!-- About Shiori content goes here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 Shiori Project. Built with Vanilla HTML/CSS/JS by Antigravity (Gemini) ＆ Claude ＆ DeepSeek.</p>
+    </footer>
+
+    <!-- GitHub Card Hover Template (Hidden) -->
+    <div id="github-card-template" style="display: none;">
+        <a href="{url}" target="_blank" class="github-card">
+            <div class="gh-card-header">
+                <i class="fab fa-github gh-logo"></i>
+                <span class="gh-repo">{repo}</span>
+                <span class="gh-state-badge {state_class}">{state}</span>
+            </div>
+            <div class="gh-card-title">{title}</div>
+            <div class="gh-card-footer">
+                <span class="gh-number">#{number}</span>
+                <span class="gh-meta"><i class="fa-regular fa-calendar"></i> {date}</span>
+            </div>
+        </a>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
