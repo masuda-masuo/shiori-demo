@@ -35,7 +35,7 @@ export default {
           
         return {
           title,
-          url: `/shiori-demo/history/${path.basename(file, '.md')}.html`,
+          url: `/history/${path.basename(file, '.md')}.html`,
           id,
           summary
         }

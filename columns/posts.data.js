@@ -35,7 +35,7 @@ export default {
           
         return {
           title,
-          url: `/shiori-demo/columns/${path.basename(file, '.md')}.html`,
+          url: `/columns/${path.basename(file, '.md')}.html`,
           id,
           summary
         }
